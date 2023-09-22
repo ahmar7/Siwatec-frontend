@@ -1,0 +1,23 @@
+.off-canvas{
+    left: -500% !important;
+    /* position: absolute !important; */
+    display: block !important;
+    transition: all 1s ease;
+}
+.active-cavy{
+    transition: all 0.3s ease;
+    position: fixed !important;
+    left: 0 !important;
+
+
+}
+.active.navigation--link{
+    background: #9e1324;
+    color: #fff;
+}
+@media (min-width:768px) {
+    .off-canvas{
+        display: none !important;
+    }
+    
+}
