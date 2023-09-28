@@ -26,21 +26,28 @@
   font-size: 28px;
   text-transform: uppercase;
 }
-.col-sname:nth-child(1){
-    text-align: left;
+.col-sname:nth-child(1) {
+  text-align: left;
 }
-.col-sname:nth-child(3){
-text-align: right;
+.col-sname:nth-child(3) {
+  text-align: right;
 }
-.banner-2img{
-    margin-top: 22px;
+.banner-2img {
+  margin-top: 22px;
 }
-.product-slider--item{
-    width: 100% !important;
+.product-slider--item {
+  width: 100% !important;
 }
-.product-carousel{
-    margin-top: 30px;
+.product-carousel {
+  margin-top: 30px;
 }
+.panel--body.is--wide.no-pad {
+  padding: 5px 0;
+}
+.panel--body.is--wide.no-pad .MsoNormal {
+  margin: 5px 0;
+}
+
 @media (max-width: 768px) {
   .banner-row {
     row-gap: 10px;
@@ -52,13 +59,10 @@ text-align: right;
   .row-sname {
     display: none;
   }
-  
 }
 
-@media (max-width:400px) {
-    .banner-col{
-        font-size: 16px;
-    }
-    
+@media (max-width: 400px) {
+  .banner-col {
+    font-size: 16px;
+  }
 }
- 

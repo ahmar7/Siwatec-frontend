@@ -1,23 +1,109 @@
-.off-canvas{
-    left: -500% !important;
-    /* position: absolute !important; */
+.off-canvas {
+  left: -500% !important;
+  /* position: absolute !important; */
+  display: block !important;
+  transition: all 1s ease;
+}
+.active-cavy {
+  transition: all 0.3s ease;
+  position: fixed !important;
+  left: 0 !important;
+}
+
+.footer--columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.column--social .youtube::before {
+  display: none;
+}
+.footer--columns::before,
+.footer--columns::after {
+  display: none;
+}
+.feature-img {
+  margin-top: 20px;
+  width: 340px !important;
+}
+.footer-main .column--content {
+  display: block !important;
+}
+.langselect {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+.top-bar--navigation.block {
+  display: flex;
+  justify-content: center;
+}
+.footer-main .column--headline::after {
+  display: none;
+}
+.tracking_tn font {
+  line-height: normal;
+}
+.header-main .container:after {
+  display: none !important;
+}
+.header-main .header--navigation {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.shop--navigation {
+  display: none !important;
+}
+.navigation--list-wrapper {
+  padding: 0;
+}
+.footer-main a {
+  display: flex;
+  align-items: center;
+}
+.footer-main .column--content img {
+  width: 55px;
+}
+.column--social span {
+  height: auto;
+}
+.banner-2img img {
+  width: 100%;
+}
+@media screen and (min-width: 64em) {
+  .header-main .albert {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 768px) {
+  .off-canvas {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-main .header--navigation {
+    display: block;
+  }
+  .shop--navigation {
+    height: 55px;
     display: block !important;
-    transition: all 1s ease;
-}
-.active-cavy{
-    transition: all 0.3s ease;
-    position: fixed !important;
-    left: 0 !important;
-
-
-}
-.active.navigation--link{
-    background: #9e1324;
-    color: #fff;
-}
-@media (min-width:768px) {
-    .off-canvas{
-        display: none !important;
-    }
-    
+  }
+  .shop--navigation .entry--menu-left .btn {
+    padding-left: 20px;
+  }
+  .navigation--entry {
+    margin-top: 10px;
+  }
+  .navigation--entry a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .navigation--entry a i {
+    font-size: 27px;
+  }
 }

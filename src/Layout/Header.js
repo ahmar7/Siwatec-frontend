@@ -1,21 +1,118 @@
-import React,{useState} from "react";
-import './style.css'
-import {   Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import "./style.css";
+import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import { baseUrl } from "../utils/Constant";
 
 const Header = () => {
-    const [isActive, setisActive] = useState(false);
-    let activeToggle=()=>{
-        if(isActive===true){
-            setisActive(false)
-        }
-        else{
-            setisActive(true)
-        }
+  const [isActive, setisActive] = useState(false);
+
+  const [isLoading, setisLoading] = useState(true);
+  const [consult, setConsult] = useState();
+  const [newConsult, setNewConsult] = useState();
+  const [logo, setLogo] = useState();
+
+  const [user, setUser] = useState({
+    email: "",
+    phone: "",
+    address: "",
+    availabilityFrom: "",
+    availabilityTo: "",
+  });
+  let activeToggle = () => {
+    if (isActive === true) {
+      setisActive(false);
+    } else {
+      setisActive(true);
     }
+  };
+  let getHeader = async () => {
+    try {
+      let res = await fetch(`${baseUrl}getHeader`, {
+        method: "GET",
+        credentials: "include",
+
+        headers: { "Content-Type": "application/json" },
+      });
+      let data = await res.json();
+      if (res.status === 200) {
+        setUser({
+          email: data.findHeader.email,
+          phone: data.findHeader.phone,
+        });
+        setLogo(data.findHeader.logo.url);
+        setConsult(data.findHeader.consultImg.url);
+      } else {
+        toast.error("something went wrong, please try again later");
+        console.log(res.status);
+        return false;
+      }
+    } catch (e) {
+      console.log("e: ", e);
+      toast.error("something went wrong, please try again later");
+    } finally {
+      setisLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getHeader();
+  }, []);
+  if (isLoading === true) {
+    return <div></div>;
+  }
   return (
     <>
       <header className="header-main">
-        <div className="container header--navigation">
+        <div className="top-bar">
+          <div className="container block-group">
+            <nav className="top-bar--navigation block" role="menubar">
+              <div className="langselect top-bar--language navigation--entry">
+                <a href="#">
+                  {/*?xml version="1.0" encoding="UTF-8"?*/}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180">
+                    <path d="M0 0h300v60H0V0z" />
+                    <path fill="#D00" d="M0 60h300v60H0V60z" />
+                    <path fill="#FFCE00" d="M0 120h300v60H0v-60z" />
+                  </svg>
+                </a>
+
+                <a href="#">
+                  {/*?xml version="1.0" encoding="UTF-8"?*/}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180">
+                    <path fill="#FFF" d="M0 0h299.843v179.98H0V0z" />
+                    <path
+                      fill="#CF142B"
+                      d="M134.928 107.933v72.047h29.988v-72.047h134.928V71.952H164.916V0h-29.988v71.952H0v35.981h134.928z"
+                    />
+                    <path
+                      fill="#00247D"
+                      d="M174.915 58.259V0h97.08l-97.08 58.259zm0 63.461v58.26h97.08l-97.08-58.26zm-49.987 0v58.26H27.849l97.079-58.26zm0-63.461V0H27.849l97.079 58.259zM.001 16.73v43.261h72.087L.001 16.73zm299.842 0v43.261h-72.087l72.087-43.261zm0 146.519v-43.261h-72.087l72.087 43.261zm-299.842 0v-43.261h72.087L.001 163.249z"
+                    />
+                    <path
+                      fill="#CF142B"
+                      d="M299.843 0h-16.654L183.4 59.992h16.654L300 0M116.443 119.984H99.789L0 179.976h16.654l99.946-59.992M83.268 60.038h16.653L0 0v10.062l83.268 49.976zm133.255 59.924h-16.654L299.79 180v-10.062l-83.267-49.976z"
+                    />
+                  </svg>
+                  <span>
+                    <font style={{ verticalAlign: "inherit" }} />
+                  </span>
+                </a>
+                <a href="#">
+                  {/*?xml version="1.0" encoding="UTF-8"?*/}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180">
+                    <path fill="#21468B" d="M0 120h300v60H0z" />
+                    <path fill="#AE1C28" d="M0 0h300v60H0z" />
+                  </svg>
+                  <span>
+                    <font style={{ verticalAlign: "inherit" }} />
+                  </span>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div className=" container header--navigation">
           <div className="logo-main block-group" role="banner">
             <div className="logo--shop block">
               <Link
@@ -23,15 +120,12 @@ const Header = () => {
                 to="/"
                 title="Siwatec - go to the homepage"
               >
-                <img
-                  src="https://www.jansen-versand.de/themes/Frontend/CcBaseJansen/frontend/_public/src/img/logos/logo.svg"
-                  alt="Siwatec - go to the homepage"
-                />
+                <img src={logo} alt="Siwatec - go to the homepage" />
               </Link>
             </div>
           </div>
           <div className="albert block">
-            <img src="https://www.jansen-versand.de/themes/Frontend/CcBaseJansen/frontend/_public/src/img/albert.png" />
+            <img src={consult} />
             <div className="teaser-text">
               <span className="first">
                 <font style={{ verticalAlign: "inherit" }}>
@@ -45,22 +139,20 @@ const Header = () => {
                 </font>
               </span>
               <a
-                href="tel:+49 5943 1881"
+                href={`tel:${user.phone}`}
                 data-role="button"
                 className="tracking_tn"
               >
                 <font style={{ verticalAlign: "inherit" }}>
-                  <font style={{ verticalAlign: "inherit" }}>
-                    +12 5943 1881
-                  </font>
+                  <font style={{ verticalAlign: "inherit" }}>{user.phone}</font>
                 </font>
               </a>
               <div className="inner_text_style">
-                <a href="mailto:info@jansen-versand.de">
+                <a href={`mailto:${user.email}`}>
                   <span>
                     <font style={{ verticalAlign: "inherit" }}>
                       <font style={{ verticalAlign: "inherit" }}>
-                        info@jansen-versand.de
+                        {user.email}
                       </font>
                     </font>
                   </span>
@@ -68,94 +160,38 @@ const Header = () => {
               </div>
             </div>
           </div>
+
           <nav className="shop--navigation block-group">
             <ul className="navigation--list block-group" role="menubar">
               <li
                 className="navigation--entry entry--menu-left"
                 role="menuitem"
-                onClick={activeToggle}
               >
                 <a
+                  onClick={activeToggle}
                   className="entry--link entry--trigger btn is--icon-left"
                   href="javascript:void(0)"
                   data-offcanvas="true"
                   data-offcanvasselector=".sidebar-main"
-                  aria-label="menu"
+                  aria-label="Menü"
                 >
-                  <i className="icon--menu" />
-                  <font style={{ verticalAlign: "inherit" }}>
-                    <font style={{ verticalAlign: "inherit" }}>menu </font>
-                  </font>
+                  <i class="fa-solid fa-bars"></i> Menu
                 </a>
-              </li>
-              <li
-                className="navigation--entry entry--search"
-                role="menuitem"
-                data-search="true"
-                aria-haspopup="true"
-                data-minlength={3}
-              >
-                <a
-                  className="btn entry--link entry--trigger"
-                  href="#show-hide--search"
-                  title="Show/close search"
-                  aria-label="Show/close search"
-                >
-                  <i className="icon--search" />
-                  <span className="search--display">
-                    <font style={{ verticalAlign: "inherit" }}>
-                      <font style={{ verticalAlign: "inherit" }}>Seek</font>
-                    </font>
-                  </span>
-                </a>
-                <form
-                  action="/search"
-                  method="get"
-                  className="main-search--form"
-                >
-                  <input
-                    type="search"
-                    name="sSearch"
-                    className="main-search--field"
-                    autoComplete="off"
-                    autoCapitalize="off"
-                    placeholder="Search term..."
-                    maxLength={60}
-                  />
-                  <button
-                    type="submit"
-                    className="main-search--button"
-                    aria-label="Seek"
-                  >
-                    <i className="icon--search" />
-                    <span className="main-search--text">
-                      <font style={{ verticalAlign: "inherit" }}>
-                        <font style={{ verticalAlign: "inherit" }}>Seek</font>
-                      </font>
-                    </span>
-                  </button>
-                  <div className="form--ajax-loader">&nbsp;</div>
-                </form>
-                <div
-                  className="main-search--results"
-                  style={{ display: "none" }}
-                />
               </li>
             </ul>
           </nav>
-          <div className="container--ajax-cart" data-collapse-cart="true" />
         </div>
       </header>
       <nav className="navigation-main">
         <div
-          className="container js--menu-scroller"
+          className=" container js--menu-scroller"
           data-menu-scroller="true"
           data-listselector=".navigation--list.container"
           data-viewportselector=".navigation--list-wrapper"
         >
           <div className="navigation--list-wrapper">
             <ul
-              className="navigation--list container js--menu-scroller--list"
+              className="navigation--list  container js--menu-scroller--list"
               role="menubar"
               itemScope="itemscope"
               itemType="https://schema.org/SiteNavigationElement"

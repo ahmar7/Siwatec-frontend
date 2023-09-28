@@ -9,21 +9,20 @@ import Top from "../components/GoTop/GoTop";
 const Home = () => {
   return (
     <>
-    <Top/>
+      <Top />
       <Header />
-      <section className="content-main container block-group">
+      <section className="content-main  container block-group">
         <div className="content-main--inner">
           <div className="content--wrapper">
             <div className="content content--home">
               <Banner />
               <CardSlider />
-              <About/>
+              <About />
             </div>
           </div>
         </div>
-    
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };

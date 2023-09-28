@@ -1,23 +1,23 @@
 import React from "react";
 import "./App.css";
 import "./assets/css/main.css";
+import "./assets/css/menuColor.css";
 import Siders from "./components/Home/siders";
-import Home from "./pages/Home";
+import ModalPopups from "./pages/ModalPopup";
 import Router from "./router/router";
-import ModalPopup from "./pages/ModalPopup";
+import "./assets/css/dashboard.css";
 
-function App() {
-
+function ModalPopup() {
   return (
     <>
-    <ModalPopup/>
-    <Siders/>
-      
+      {/* <ModalPopups /> */}
+      {/* <Siders /> */}
+
       <div className="page-wrap">
-        <Router/>
+        <Router />
       </div>
     </>
   );
 }
 
-export default App;
+export default ModalPopup;

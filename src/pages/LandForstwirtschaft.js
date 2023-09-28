@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Layout/Header";
- 
+
 import Footer from "../Layout/Footer";
 import Breadcrum from "../components/Home/Breadcrum";
 import Cards from "../components/LandForstwirtschaft/cards";
@@ -13,7 +13,7 @@ const LandForstwirtschaft = () => {
     <>
       <Top />
       <Header />
-      <section className="content-main container block-group is--ctl-custom is--act-index">
+      <section className="content-main  container block-group is--ctl-custom is--act-index">
         <Breadcrum pageName={pageName} />
         <div className="content-main--inner">
           <Cards />
